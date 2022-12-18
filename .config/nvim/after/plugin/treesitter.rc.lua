@@ -2,7 +2,12 @@ local status, ts = pcall(require, "nvim-treesitter.configs")
 if (not status) then return end
 
 ts.setup {
-  highlight = { enable = true, additional_vim_regex_highlighting = true },
+  ensure_installed = { "c", "lua", "rust", "javascript", "typescript" },
+  highlight = {
+    enable = true,
+    disable = { "" },
+    additional_vim_regex_highlighting = true
+  },
   incremental_selection = {
     enable = true,
     keymaps = {
@@ -12,7 +17,7 @@ ts.setup {
       node_decremental = "<S-TAB>",
     },
   },
-  indent = { enable = true },
+  indent = { enable = true, disable = { "yaml" } },
   matchup = { enable = true },
   autopairs = { enable = true },
   playground = {
@@ -33,9 +38,27 @@ ts.setup {
     },
   },
   rainbow = {
-    enable = false, -- my default preference for rainbow is false
-    extended_mode = true, -- Highlight also non-parentheses delimiters
-    max_file_lines = 1000,
+    enable = true, -- my default preference for rainbow is false
+    extended_mode = false, -- Highlight also non-parentheses delimiters
+    max_file_lines = nil,
+    colors = {
+      "#000",
+      "#000",
+      "#000",
+      "#fff",
+      "#fff",
+      "#fff",
+      "#fff",
+    },
+    termcolors = {
+      "Green",
+      "Yellow",
+      "Blue",
+      "Magenta",
+      "Cyan",
+      "White",
+      "Red",
+    },
   },
   refactor = {
     smart_rename = { enable = true, keymaps = { smart_rename = "grr" } },
@@ -105,5 +128,5 @@ ts.setup {
   },
 }
 
-local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-parser_config.tsx.filetype_to_parsername = { "javascript", "typescript.tsx" }
+-- local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+-- parser_config.tsx.filetype_to_parsername = { "javascript", "typescript.tsx" }

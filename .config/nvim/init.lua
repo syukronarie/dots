@@ -1,6 +1,6 @@
 -- https://github.com/lewis6991/impatient.nvim
 -- :LuaCacheClear
-require 'impatient'
+-- require 'impatient'
 require 'arie.plugins'
 require 'arie.base'
 require 'arie.highlights'

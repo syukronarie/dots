@@ -20,7 +20,7 @@ opt.smartindent = true
 opt.smarttab = true
 
 -- line wrapping
-opt.wrap = false
+opt.wrap = true
 
 -- search settings
 opt.hlsearch = true
@@ -29,8 +29,10 @@ opt.smartcase = true
 
 -- fold
 opt.foldlevel = 20
-opt.foldmethod = "expr"
-opt.foldexpr = "nvim_treesitter#foldexpr()"
+opt.foldlevelstart = 999
+opt.foldenable = true
+opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+opt.foldcolumn = '1'
 
 opt.backspace = { 'start', 'eol', 'indent' }
 opt.backup = false
@@ -45,6 +47,7 @@ opt.shell = 'zsh'
 opt.showcmd = true
 opt.title = true
 opt.wildignore:append { '*/node_modules/*' }
+opt.modifiable = true
 
 -- Undercurl
 vim.cmd([[let &t_Cs = "\e[4:3m"]])

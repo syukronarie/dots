@@ -22,7 +22,7 @@ keymap.set('n', '<C-a>', 'gg<S-v>G')
 --vim.api.nvim_create_user_command('W', 'w !sudo tee > /dev/null %', {})
 
 -- window management
-keymap.set("n", "<C-w>", ":close<CR>")
+keymap.set("n", "te", ":close<CR>")
 keymap.set("n", "to", ":tabnew<CR>")
 keymap.set("n", "tx", ":tabclose<CR>")
 keymap.set("n", "tn", ":tabn<CR>")

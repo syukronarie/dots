@@ -7,6 +7,8 @@ saga.init_lsp_saga({
   server_filetype_map = {
     typescript = "typescript",
     javascript = "javascript",
+    clang = "clang",
+    cpp = "clang"
   },
 })
 
@@ -23,5 +25,5 @@ keymap("n", "gr", "<Cmd>Lspsaga rename<CR>", opts)
 keymap("n", "<leader>o", "<cmd>LSoutlineToggle<CR>", { silent = true })
 keymap({ "n", "v" }, "<C-space>", "<cmd>Lspsaga code_action<CR>", { silent = true })
 keymap("n", "gt", "<cmd>Lspsaga open_floaterm<CR>", { silent = true })
-keymap("n", "gt", "<cmd>Lspsaga open_floaterm gitui<CR>", { silent = true })
-keymap("t", "gt", [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], { silent = true })
+keymap("n", "gt", "<cmd>Lspsaga open_floaterm lazygit<CR>", { silent = true })
+keymap("t", "q", [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], { silent = true })

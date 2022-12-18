@@ -9,6 +9,7 @@ local ensure_packer = function()
   end
   return false
 end
+
 local packer_bootstrap = ensure_packer() -- true if packer was just installed
 
 -- autocommand that reloads neovim and installs/updates/removes plugins
@@ -16,25 +17,28 @@ local packer_bootstrap = ensure_packer() -- true if packer was just installed
 vim.cmd([[ 
   augroup packer_user_config
     autocmd!
-    autocmd BufWritePost plugins-setup.lua source <afile> | PackerSync
+    autocmd BufWritePost plugins.lua source <afile> | PackerSync
   augroup end
 ]])
 
+
+-- import packer safely
 local status, packer = pcall(require, "packer")
-if (not status) then
+if not status then
   print("Packer is not installed")
   return
 end
 
 vim.cmd [[packadd packer.nvim]]
 
-packer.startup(function(use)
+return packer.startup(function(use)
   use 'wbthomason/packer.nvim'
   use {
     'svrana/neosolarized.nvim',
     requires = { 'tjdevries/colorbuddy.nvim' }
   }
   use 'lewis6991/impatient.nvim'
+  use 'kyazdani42/nvim-web-devicons' -- File icons
   use 'nvim-lualine/lualine.nvim' -- Statusline
   use 'nvim-lua/plenary.nvim' -- Common utilities
   use 'onsails/lspkind-nvim' -- vscode-like pictograms
@@ -47,18 +51,38 @@ packer.startup(function(use)
   use 'MunifTanjim/prettier.nvim'
   use 'williamboman/mason.nvim'
   use 'williamboman/mason-lspconfig.nvim'
+  use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
 
   use 'glepnir/lspsaga.nvim' -- LSP UIs
+  use {
+    "ray-x/lsp_signature.nvim",
+  }
 
   use 'L3MON4D3/LuaSnip'
   use 'saadparwaiz1/cmp_luasnip'
   use 'rafamadriz/friendly-snippets'
+  use {
+    "SmiteshP/nvim-navic",
+    requires = "neovim/nvim-lspconfig"
+  }
 
   use {
     'nvim-treesitter/nvim-treesitter',
-    run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
+    run = ":TSUpdate",
   }
-  use 'kyazdani42/nvim-web-devicons' -- File icons
+  use 'nvim-treesitter/nvim-treesitter-context'
+  use 'nvim-treesitter/playground'
+
+  use 'deoplete-plugins/deoplete-clang'
+
+  use 'mg979/vim-visual-multi'
+  use({
+    'noib3/nvim-cokeline',
+    requires = 'kyazdani42/nvim-web-devicons', -- If you want devicons
+    config = function()
+      require('cokeline').setup()
+    end
+  })
   use 'nvim-telescope/telescope.nvim'
   use 'nvim-telescope/telescope-file-browser.nvim'
   use 'windwp/nvim-autopairs'
@@ -71,7 +95,7 @@ packer.startup(function(use)
   })
   use 'akinsho/nvim-bufferline.lua'
   use 'lunarvim/colorschemes' -- A bunch of colorschemes you can try out
-
+  use 'severin-lemaignan/vim-minimap'
   -- use 'github/copilot.vim'
 
   use 'nvim-tree/nvim-tree.lua' -- file explorer
@@ -87,10 +111,11 @@ packer.startup(function(use)
 
   use 'bluz71/vim-nightfly-guicolors' -- preferred colorscheme
   use 'whatsthatsmell/codesmell_dark.vim'
-  use 'yunlingz/ci_dark'
-  use 'navarasu/onedark.nvim'
-  use 'tomasiser/vim-code-dark'
+  use { "catppuccin/nvim", as = "catppuccin" }
+  use 'folke/tokyonight.nvim'
   use 'Mofiqul/vscode.nvim'
+  use 'ellisonleao/gruvbox.nvim'
+  use { "rockyzhang24/arctic.nvim", requires = { "rktjmp/lush.nvim" } }
 
   use({
     'goolord/alpha-nvim',
@@ -110,18 +135,12 @@ packer.startup(function(use)
         dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
         dashboard.button("q", "  Quit NVIM", ":qa<CR>"),
       }
-      local handle = io.popen('fortune')
-      local fortune = handle:read("*a")
-      handle:close()
-      dashboard.section.footer.val = fortune
-
       dashboard.config.opts.noautocmd = true
 
       vim.cmd [[autocmd User AlphaReady echo 'ready']]
 
       alpha.setup(dashboard.config)
     end
-
   })
 
   if packer_bootstrap then
