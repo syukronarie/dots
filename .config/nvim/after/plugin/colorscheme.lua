@@ -1,5 +1,3 @@
--- codesmell_dark
--- ci_dark
 -- codedark
 -- onedark
 -- vscode
@@ -29,7 +27,7 @@
 require("tokyonight").setup({
   -- your configuration comes here
   -- or leave it empty to use the default settings
-  style = "storm", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+  style = "night", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
   light_style = "day", -- The theme is used when the background is set to light
   transparent = true, -- Enable this to disable setting the background color
   terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
@@ -74,10 +72,10 @@ function ColorMyPencils()
     bg = "none",
   })
 
-  hl("ColorColumn", {
-    ctermbg = 0,
-    bg = "#2B79A0",
-  })
+  -- hl("ColorColumn", {
+  --   ctermbg = 0,
+  --   bg = "#2B79A0",
+  -- })
 
   hl("CursorLineNR", {
     bg = "None"
@@ -87,9 +85,9 @@ function ColorMyPencils()
     bg = "none"
   })
 
-  hl("LineNr", {
-    fg = "#5eacd3"
-  })
+  -- hl("LineNr", {
+  --   fg = "#5eacd3"
+  -- })
 
   hl("netrwDir", {
     fg = "#5eacd3"
@@ -98,10 +96,3 @@ function ColorMyPencils()
 end
 
 ColorMyPencils()
-
-
--- local status, _ = pcall(vim.cmd, "colorscheme vscode")
--- if not status then
---   print("Colorscheme not found!")
---   return
--- end

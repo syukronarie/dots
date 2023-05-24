@@ -1,10 +1,16 @@
+-- import nvim-cmp plugin safely
+local status, ufo = pcall(require, "ufo")
+if not status then
+  return
+end
+
 local ftMap = {
   vim = 'indent',
   javascript = { 'indent' },
   typescript = { 'indent' },
   git = ''
 }
-require('ufo').setup({
+ufo.setup({
   open_fold_hl_timeout = 150,
   close_fold_kinds = {},
   preview = {

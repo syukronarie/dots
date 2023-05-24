@@ -13,8 +13,12 @@ telescope.setup {
   defaults = {
     mappings = {
       n = {
-        ["q"] = actions.close
+        ["q"] = actions.close,
+        ["Esc"] = actions.close
       },
+      i = {
+        ["q"] = actions.close
+      }
     },
   },
   extensions = {
@@ -49,19 +53,22 @@ vim.keymap.set('n', ';f',
       hidden = true
     })
   end)
-vim.keymap.set('n', ';r', function()
+vim.keymap.set('n', ';k', function()
+  builtin.keymaps()
+end)
+vim.keymap.set('n', ';g', function()
   builtin.live_grep()
 end)
 vim.keymap.set('n', '\\\\', function()
   builtin.buffers()
 end)
-vim.keymap.set('n', ';t', function()
+vim.keymap.set('n', ';h', function()
   builtin.help_tags()
 end)
 vim.keymap.set('n', ';;', function()
   builtin.resume()
 end)
-vim.keymap.set('n', ';e', function()
+vim.keymap.set('n', ';d', function()
   builtin.diagnostics()
 end)
 vim.keymap.set("n", "<C-p>", function()

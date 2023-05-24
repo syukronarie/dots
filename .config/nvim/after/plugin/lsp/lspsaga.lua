@@ -3,14 +3,46 @@ if not status then
   return
 end
 
-saga.init_lsp_saga({
+
+saga.setup({
   server_filetype_map = {
     typescript = "typescript",
     javascript = "javascript",
     clang = "clang",
     cpp = "clang"
   },
+  ui = {
+    -- Currently, only the round theme exists
+    theme = "round",
+    -- This option only works in Neovim 0.9
+    title = true,
+    -- Border type can be single, double, rounded, solid, shadow.
+    border = "rounded",
+    winblend = 0,
+    expand = "",
+    collapse = "",
+    preview = " ",
+    code_action = "💡",
+    diagnostic = "🐞",
+    incoming = " ",
+    outgoing = " ",
+    hover = ' ',
+    kind = {},
+  },
+  preview = {
+    lines_above = 0,
+    lines_below = 20,
+  },
 })
+
+-- saga.init_lsp_saga({
+--   server_filetype_map = {
+--     typescript = "typescript",
+--     javascript = "javascript",
+--     clang = "clang",
+--     cpp = "clang"
+--   },
+-- })
 
 local keymap = vim.keymap.set
 local opts = { noremap = true, silent = true }
@@ -24,6 +56,6 @@ keymap("n", "gp", "<Cmd>Lspsaga peek_definition<CR>", opts)
 keymap("n", "gr", "<Cmd>Lspsaga rename<CR>", opts)
 keymap("n", "<leader>o", "<cmd>LSoutlineToggle<CR>", { silent = true })
 keymap({ "n", "v" }, "<C-space>", "<cmd>Lspsaga code_action<CR>", { silent = true })
-keymap("n", "gt", "<cmd>Lspsaga open_floaterm<CR>", { silent = true })
-keymap("n", "gt", "<cmd>Lspsaga open_floaterm lazygit<CR>", { silent = true })
-keymap("t", "q", [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], { silent = true })
+keymap("n", "gt", "<cmd>Lspsaga term_toggle<CR>", { silent = true })
+keymap("n", "<leader>gt", "<cmd>Lspsaga term_toggle lazygit<CR>", { silent = true })
+keymap("t", "q", [[<C-\><C-n><cmd>Lspsaga term_toggle<CR>]], { silent = true })

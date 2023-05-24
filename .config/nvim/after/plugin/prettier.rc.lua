@@ -17,4 +17,3 @@ prettier.setup {
     "cpp"
   }
 }
-

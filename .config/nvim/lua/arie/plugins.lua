@@ -21,7 +21,6 @@ vim.cmd([[
   augroup end
 ]])
 
-
 -- import packer safely
 local status, packer = pcall(require, "packer")
 if not status then
@@ -32,46 +31,93 @@ end
 vim.cmd [[packadd packer.nvim]]
 
 return packer.startup(function(use)
+  -- Package manager
   use 'wbthomason/packer.nvim'
+
   use {
     'svrana/neosolarized.nvim',
     requires = { 'tjdevries/colorbuddy.nvim' }
   }
+
+  use { -- LSP Configuration & Plugins
+    'neovim/nvim-lspconfig',
+    requires = {
+      -- Automatically install LSPs to stdpath for neovim
+      'williamboman/mason.nvim',
+      'williamboman/mason-lspconfig.nvim',
+
+      -- Useful status updates for LSP
+      'j-hui/fidget.nvim',
+
+      -- Additional lua configuration, makes nvim stuff amazing
+      'folke/neodev.nvim',
+    },
+  }
+
+  use { -- Autocompletion
+    'hrsh7th/nvim-cmp',
+    requires = {
+      -- nvim-cmp source for neovim's built-in LSP
+      'hrsh7th/cmp-nvim-lsp',
+      'L3MON4D3/LuaSnip',
+      'saadparwaiz1/cmp_luasnip'
+    },
+  }
+
+  use { -- Highlight, edit, and navigate code
+    'nvim-treesitter/nvim-treesitter',
+    run = function()
+      pcall(require('nvim-treesitter.install').update { with_sync = true })
+    end,
+  }
+  -- use { 'nvim-treesitter/nvim-treesitter', run = ":TSUpdate" }
+  use 'nvim-treesitter/nvim-treesitter-context'
+  use 'nvim-treesitter/playground'
+
+  -- Fuzzy Finder (files, lsp, etc)
+  use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
+
+  -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
+  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
+
+  use { -- Additional text objects via treesitter
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    after = 'nvim-treesitter',
+  }
+
+  -- Git related plugins
+  use 'dinhhuy258/git.nvim' -- For git blame & browse
+  use 'tpope/vim-fugitive'
+  use 'tpope/vim-rhubarb'
+  use 'lewis6991/gitsigns.nvim'
+
+  use 'navarasu/onedark.nvim' -- Theme inspired by Atom
+  use 'nvim-lualine/lualine.nvim' -- Fancier statusline
+  use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
+  use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
+  use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
+
+  -- toggle term
+  use 'akinsho/toggleterm.nvim'
   use 'lewis6991/impatient.nvim'
   use 'kyazdani42/nvim-web-devicons' -- File icons
-  use 'nvim-lualine/lualine.nvim' -- Statusline
-  use 'nvim-lua/plenary.nvim' -- Common utilities
   use 'onsails/lspkind-nvim' -- vscode-like pictograms
   use 'hrsh7th/cmp-buffer' -- nvim-cmp source for buffer words
-  use 'hrsh7th/cmp-nvim-lsp' -- nvim-cmp source for neovim's built-in LSP
   use 'hrsh7th/cmp-path'
-  use 'hrsh7th/nvim-cmp' -- Completion
-  use 'neovim/nvim-lspconfig' -- LSP
+
   use 'jose-elias-alvarez/null-ls.nvim' -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
   use 'MunifTanjim/prettier.nvim'
-  use 'williamboman/mason.nvim'
-  use 'williamboman/mason-lspconfig.nvim'
+
   use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
 
   use 'glepnir/lspsaga.nvim' -- LSP UIs
-  use {
-    "ray-x/lsp_signature.nvim",
-  }
+  use 'ray-x/lsp_signature.nvim'
 
-  use 'L3MON4D3/LuaSnip'
-  use 'saadparwaiz1/cmp_luasnip'
   use 'rafamadriz/friendly-snippets'
   use {
     "SmiteshP/nvim-navic",
     requires = "neovim/nvim-lspconfig"
   }
-
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    run = ":TSUpdate",
-  }
-  use 'nvim-treesitter/nvim-treesitter-context'
-  use 'nvim-treesitter/playground'
 
   use 'deoplete-plugins/deoplete-clang'
 
@@ -83,7 +129,6 @@ return packer.startup(function(use)
       require('cokeline').setup()
     end
   })
-  use 'nvim-telescope/telescope.nvim'
   use 'nvim-telescope/telescope-file-browser.nvim'
   use 'windwp/nvim-autopairs'
   use 'windwp/nvim-ts-autotag'
@@ -101,16 +146,11 @@ return packer.startup(function(use)
   use 'nvim-tree/nvim-tree.lua' -- file explorer
   use 'szw/vim-maximizer' -- maximizes and restores current window
 
-  use 'lewis6991/gitsigns.nvim'
-  use 'dinhhuy258/git.nvim' -- For git blame & browse
-
-  use 'numToStr/Comment.nvim' -- commenting with gc
   use 'tpope/vim-surround'
 
   use 'p00f/nvim-ts-rainbow'
 
   use 'bluz71/vim-nightfly-guicolors' -- preferred colorscheme
-  use 'whatsthatsmell/codesmell_dark.vim'
   use { "catppuccin/nvim", as = "catppuccin" }
   use 'folke/tokyonight.nvim'
   use 'Mofiqul/vscode.nvim'
@@ -122,23 +162,7 @@ return packer.startup(function(use)
     requires = { 'kyazdani42/nvim-web-devicons' },
     config = function()
       local alpha = require 'alpha'
-      local dashboard = require 'alpha.themes.dashboard'
-      dashboard.section.header.val = {
-        [[                               __                ]],
-        [[  ___     ___    ___   __  __ /\_\    ___ ___    ]],
-        [[ / _ `\  / __`\ / __`\/\ \/\ \\/\ \  / __` __`\  ]],
-        [[/\ \/\ \/\  __//\ \_\ \ \ \_/ |\ \ \/\ \/\ \/\ \ ]],
-        [[\ \_\ \_\ \____\ \____/\ \___/  \ \_\ \_\ \_\ \_\]],
-        [[ \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]],
-      }
-      dashboard.section.buttons.val = {
-        dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
-        dashboard.button("q", "  Quit NVIM", ":qa<CR>"),
-      }
-      dashboard.config.opts.noautocmd = true
-
-      vim.cmd [[autocmd User AlphaReady echo 'ready']]
-
+      local dashboard = require 'alpha.themes.theta'
       alpha.setup(dashboard.config)
     end
   })
