@@ -21,6 +21,10 @@ keymap.set('n', '<C-a>', 'gg<S-v>G')
 -- Save with root permission (not working for now)
 --vim.api.nvim_create_user_command('W', 'w !sudo tee > /dev/null %', {})
 
+-- line management
+keymap.set('n', 'J', ':m +1<CR>')
+keymap.set('n', 'K', ':m -2<CR>')
+
 -- window management
 keymap.set("n", "te", ":NvimTreeClose<bar> bd<CR>")
 keymap.set("n", "to", ":tabnew<CR>")
