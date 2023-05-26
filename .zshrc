@@ -31,6 +31,7 @@ alias gpatch="git format-patch -1"
 alias brall="brew leaves"
 alias nvall="nvm list"
 alias cheat="~/.cheatsheet/init.sh"
+alias cat="bat --theme=\$(defaults read -globalDomain AppleInterfaceStyle &> /dev/null && echo default || echo GitHub)"
 alias lg='lazygit'
 alias sz='source ~/.zshrc'
 
