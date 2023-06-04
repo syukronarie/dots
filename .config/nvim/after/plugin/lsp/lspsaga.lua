@@ -35,27 +35,18 @@ saga.setup({
   },
 })
 
--- saga.init_lsp_saga({
---   server_filetype_map = {
---     typescript = "typescript",
---     javascript = "javascript",
---     clang = "clang",
---     cpp = "clang"
---   },
--- })
-
 local keymap = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
+keymap("i", "<C-k>", "<Cmd>Lspsaga signature_help<CR>", opts)
 keymap("n", "<C-j>", "<Cmd>Lspsaga diagnostic_jump_next<CR>", opts)
 keymap("n", "<C-k>", "<Cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
-keymap("n", "K", "<Cmd>Lspsaga hover_doc<CR>", opts)
-keymap("n", "gd", "<Cmd>Lspsaga lsp_finder<CR>", opts)
-keymap("i", "<C-k>", "<Cmd>Lspsaga signature_help<CR>", opts)
+keymap("n", "H", "<Cmd>Lspsaga hover_doc<CR>", opts)
+keymap("n", "gf", "<Cmd>Lspsaga lsp_finder<CR>", opts)
 keymap("n", "gp", "<Cmd>Lspsaga peek_definition<CR>", opts)
 keymap("n", "gr", "<Cmd>Lspsaga rename<CR>", opts)
-keymap("n", "<leader>o", "<cmd>LSoutlineToggle<CR>", { silent = true })
-keymap({ "n", "v" }, "<C-space>", "<cmd>Lspsaga code_action<CR>", { silent = true })
 keymap("n", "gt", "<cmd>Lspsaga term_toggle<CR>", { silent = true })
+keymap({ "n", "v" }, "<C-space>", "<cmd>Lspsaga code_action<CR>", { silent = true })
+keymap("n", "<leader>o", "<cmd>LSoutlineToggle<CR>", { silent = true })
 keymap("n", "<leader>gt", "<cmd>Lspsaga term_toggle lazygit<CR>", { silent = true })
 keymap("t", "q", [[<C-\><C-n><cmd>Lspsaga term_toggle<CR>]], { silent = true })
