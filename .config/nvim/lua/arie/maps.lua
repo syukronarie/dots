@@ -12,7 +12,7 @@ keymap.set('n', '<enter>', 'j')
 keymap.set('n', '+', '<C-a>')
 keymap.set('n', '-', '<C-x>')
 
--- Delete a word backwards 
+-- Delete a word backwards
 keymap.set('n', 'dw', 'vb"_d')
 
 -- Select all
