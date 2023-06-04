@@ -14,7 +14,7 @@ local packer_bootstrap = ensure_packer() -- true if packer was just installed
 
 -- autocommand that reloads neovim and installs/updates/removes plugins
 -- when file is saved
-vim.cmd([[ 
+vim.cmd([[
   augroup packer_user_config
     autocmd!
     autocmd BufWritePost plugins.lua source <afile> | PackerSync
@@ -156,6 +156,11 @@ return packer.startup(function(use)
   use 'Mofiqul/vscode.nvim'
   use 'ellisonleao/gruvbox.nvim'
   use { "rockyzhang24/arctic.nvim", requires = { "rktjmp/lush.nvim" } }
+
+  -- harpoon
+  use 'theprimeagen/harpoon'
+  -- undotree
+  use 'mbbill/undotree'
 
   use({
     'goolord/alpha-nvim',
