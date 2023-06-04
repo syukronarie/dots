@@ -160,6 +160,11 @@ _G.packer_plugins = {
     path = "/Users/ariesyukron/.local/share/nvim/site/pack/packer/start/gruvbox.nvim",
     url = "https://github.com/ellisonleao/gruvbox.nvim"
   },
+  harpoon = {
+    loaded = true,
+    path = "/Users/ariesyukron/.local/share/nvim/site/pack/packer/start/harpoon",
+    url = "https://github.com/theprimeagen/harpoon"
+  },
   ["impatient.nvim"] = {
     loaded = true,
     path = "/Users/ariesyukron/.local/share/nvim/site/pack/packer/start/impatient.nvim",
@@ -360,6 +365,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/ariesyukron/.local/share/nvim/site/pack/packer/start/tokyonight.nvim",
     url = "https://github.com/folke/tokyonight.nvim"
+  },
+  undotree = {
+    loaded = true,
+    path = "/Users/ariesyukron/.local/share/nvim/site/pack/packer/start/undotree",
+    url = "https://github.com/mbbill/undotree"
   },
   ["vim-fugitive"] = {
     loaded = true,
