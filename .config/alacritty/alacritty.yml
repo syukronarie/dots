@@ -1,0 +1,111 @@
+live_config_reload: true
+
+window:
+  option_as_alt: Both
+  # opacity: 0.97
+  padding:
+    x: 0
+    y: 0
+  dynamic_padding: true
+  decorations: buttonless
+  # Startup Mode (changes require restart)
+  startup_mode: Maximized
+
+font:
+  normal:
+    family: JetBrainsMono Nerd Font
+    style: Regular
+  size: 20.0
+
+  # Offset is the extra space around each character. `offset.y` can be thought of
+  # as modifying the line spacing, and `offset.x` as modifying the letter spacing
+  # I've given in 14 spacing which fits really well with my fonts, you may change it
+  # to your convenience but make sure to adjust 'glyph_offset' appropriately post that
+offset:
+  x: 0
+  y: 0
+
+# Note: This requires RESTART
+# By default when you change the offset above you'll see an issue, where the texts are bottom
+# aligned with the cursor, this is to make sure they center align.
+# This offset should usually be 1/2 of the above offset-y being set.
+glyph_offset:
+  x: 0
+  # Keeping this as half of offset to vertically align the text in cursor
+  y: 8
+
+# Better font rendering for mac
+use_thin_strokes: true
+
+# Use custom cursor colors. If true, display the cursor in the cursor.foreground
+# and cursor.background colors, otherwise invert the colors of the cursor.
+custom_cursor_colors: true
+
+colors:
+  name: rosepine
+  primary:
+    foreground: "#e0def4"
+    background: "#0b0900"
+    # background: '#1c1c1c'
+    # background: '#191724'
+    dim_foreground: "#908caa"
+    bright_foreground: "#e0def4"
+  cursor:
+    text: "#1d1f21"
+    cursor: "#cccccc"
+  normal:
+    black: "#26233a"
+    red: "#eb6f92"
+    green: "#31748f"
+    yellow: "#f6c177"
+    blue: "#9ccfd8"
+    magenta: "#c4a7e7"
+    cyan: "#ebbcba"
+    white: "#e0def4"
+  bright:
+    black: "#6e6a86"
+    red: "#eb6f92"
+    green: "#31748f"
+    yellow: "#f6c177"
+    blue: "#9ccfd8"
+    magenta: "#c4a7e7"
+    cyan: "#ebbcba"
+    white: "#e0def4"
+  vi_mode_cursor:
+    text: "#e0def4"
+    cursor: "#524f67"
+  search:
+    matches:
+      foreground: "#908caa"
+      background: "#26233a"
+    focused_match:
+      foreground: "#191724"
+      background: "#ebbcba"
+  hints:
+    start:
+      foreground: "#908caa"
+      background: "#1f1d2e"
+    end:
+      foreground: "#6e6a86"
+      background: "#1f1d2e"
+  line_indicator:
+    foreground: None
+    background: None
+  footer_bar:
+    foreground: "#e0def4"
+    background: "#1f1d2e"
+  selection:
+    text: "#e0def4"
+    background: "#403d52"
+  dim:
+    black: "#6e6a86"
+    red: "#eb6f92"
+    green: "#31748f"
+    yellow: "#f6c177"
+    blue: "#9ccfd8"
+    magenta: "#c4a7e7"
+    cyan: "#ebbcba"
+    white: "#e0def4"
+
+key_bindings:
+  - { key: F11, action: ToggleFullscreen }
